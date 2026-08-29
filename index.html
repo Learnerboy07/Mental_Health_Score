@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindMetric — Student Mental Health Prediction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <svg class="brand-wave" viewBox="0 0 120 40" aria-hidden="true">
+        <path d="M0 20 Q 10 4, 20 20 T 40 20 T 60 20 T 80 20 T 100 20 T 120 20"
+              fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>MindMetric</h1>
+        <p class="tagline">A closer look at how digital habits shape student wellbeing</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <section class="intro-card" aria-label="About this tool">
+    <p>
+      Answer a few questions about your routine, study load, and social media use.
+      The model behind this tool estimates a mental health score from patterns across
+      thousands of student responses — a starting point for reflection, not a diagnosis.
+    </p>
+  </section>
+
+  <form id="predict-form" class="form-card" novalidate>
+
+    <fieldset class="form-group">
+      <legend>About you</legend>
+      <div class="field-grid">
+
+        <div class="field">
+          <label for="Age">Age <span class="req">*</span></label>
+          <input type="number" id="Age" name="Age" min="1" max="100" step="1"
+                 placeholder="e.g. 21" required>
+          <p class="hint">Whole number, 1–100</p>
+        </div>
+
+        <div class="field">
+          <label for="Gender">Gender <span class="req">*</span></label>
+          <select id="Gender" name="Gender" required>
+            <option value="" disabled selected>Choose one</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="Country">Country <span class="req">*</span></label>
+          <input type="text" id="Country" name="Country" list="country-list"
+                 placeholder="e.g. India" required>
+          <datalist id="country-list">
+            <option value="India"></option>
+            <option value="USA"></option>
+            <option value="Canada"></option>
+            <option value="Australia"></option>
+            <option value="UK"></option>
+            <option value="Germany"></option>
+            <option value="Mexico"></option>
+            <option value="Turkey"></option>
+            <option value="France"></option>
+          </datalist>
+          <p class="hint">Any country — less common ones are grouped as "Other" by the model</p>
+        </div>
+
+        <div class="field">
+          <label for="Academic_Level">Academic level <span class="req">*</span></label>
+          <select id="Academic_Level" name="Academic_Level" required>
+            <option value="" disabled selected>Choose one</option>
+            <option value="High School">High School</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+          </select>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <legend>Digital habits</legend>
+      <div class="field-grid">
+
+        <div class="field">
+          <label for="Most_Used_Platform">Most used platform <span class="req">*</span></label>
+          <select id="Most_Used_Platform" name="Most_Used_Platform" required>
+            <option value="" disabled selected>Choose one</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">TikTok</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Snapchat">Snapchat</option>
+            <option value="YouTube">YouTube</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="WeChat">WeChat</option>
+            <option value="LINE">LINE</option>
+            <option value="KakaoTalk">KakaoTalk</option>
+            <option value="VKontakte">VKontakte</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="Purpose_Of_Use">Main purpose of use <span class="req">*</span></label>
+          <select id="Purpose_Of_Use" name="Purpose_Of_Use" required>
+            <option value="" disabled selected>Choose one</option>
+            <option value="Networking">Networking</option>
+            <option value="Education">Education</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="News">News</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="Avg_Daily_Usage_Hours">Average daily usage (hours) <span class="req">*</span></label>
+          <input type="number" id="Avg_Daily_Usage_Hours" name="Avg_Daily_Usage_Hours"
+                 min="0" step="0.1" placeholder="e.g. 4.5" required>
+          <p class="hint">0 or more, decimals allowed</p>
+        </div>
+
+        <div class="field">
+          <label for="Daily_Unlocks">Daily phone unlocks <span class="req">*</span></label>
+          <input type="number" id="Daily_Unlocks" name="Daily_Unlocks"
+                 min="0" step="1" placeholder="e.g. 60" required>
+          <p class="hint">Whole number, 0 or more</p>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <legend>Wellbeing &amp; lifestyle</legend>
+      <div class="field-grid">
+
+        <div class="field">
+          <label for="Study_Hours">Study hours per day <span class="req">*</span></label>
+          <input type="number" id="Study_Hours" name="Study_Hours"
+                 min="0" step="0.1" placeholder="e.g. 3" required>
+        </div>
+
+        <div class="field">
+          <label for="Physical_Activity_Hours">Physical activity (hours/day) <span class="req">*</span></label>
+          <input type="number" id="Physical_Activity_Hours" name="Physical_Activity_Hours"
+                 min="0" step="0.1" placeholder="e.g. 1" required>
+        </div>
+
+        <div class="field">
+          <label for="Sleep_Hours_Per_Night">Sleep per night (hours) <span class="req">*</span></label>
+          <input type="number" id="Sleep_Hours_Per_Night" name="Sleep_Hours_Per_Night"
+                 min="0" max="24" step="0.1" placeholder="e.g. 7" required>
+          <p class="hint">0–24</p>
+        </div>
+
+        <div class="field">
+          <label for="Stress_Level">Current stress level <span class="req">*</span></label>
+          <select id="Stress_Level" name="Stress_Level" required>
+            <option value="" disabled selected>Choose one</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Very High">Very High</option>
+          </select>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <div id="error-box" class="error-box" role="alert" hidden></div>
+
+    <div class="form-actions">
+      <button type="reset" id="reset-btn" class="btn btn-ghost">Clear form</button>
+      <button type="submit" id="submit-btn" class="btn btn-primary">
+        <span class="btn-label">Get my prediction</span>
+        <span class="btn-spinner" hidden aria-hidden="true"></span>
+      </button>
+    </div>
+  </form>
+
+  <div id="loading-overlay" class="loading-overlay" hidden aria-live="polite">
+    <div class="breathing-circle"></div>
+    <p>Analyzing your responses…</p>
+  </div>
+
+  <section id="result-card" class="result-card" hidden aria-live="polite">
+    <div class="result-gauge">
+      <svg id="gauge-svg" viewBox="0 0 220 130" aria-hidden="true">
+        <path id="gauge-track" d="" fill="none" stroke-linecap="round"/>
+        <path id="gauge-fill" d="" fill="none" stroke-linecap="round"/>
+        <circle id="gauge-needle-base" cx="110" cy="110" r="6"></circle>
+        <line id="gauge-needle" x1="110" y1="110" x2="110" y2="40"></line>
+      </svg>
+      <div class="gauge-value">
+        <span id="score-number">–</span>
+        <span class="gauge-caption">out of 10</span>
+      </div>
+    </div>
+    <div class="result-text">
+      <p class="result-eyebrow">Predicted mental health score</p>
+      <h2 id="result-status">–</h2>
+      <p id="result-detail" class="result-detail"></p>
+      <p class="result-footnote">
+        This is a statistical estimate from a machine learning model, not a clinical
+        assessment. If you're struggling, please reach out to a counselor, doctor, or
+        someone you trust.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>MindMetric is an educational demo. It does not store your answers or provide medical advice.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
