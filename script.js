@@ -7,7 +7,7 @@
 // is what double-clicking the file or "Open File" in an editor does), a
 // relative "/predict" resolves to "file:///predict" and always fails.
 // This picks the right one automatically so both workflows work:
-const BACKEND_ORIGIN = "http://127.0.0.1:8000";
+const BACKEND_ORIGIN = "https://mental-health-score-1-ma8a.onrender.com";
 const API_URL = window.location.protocol === "file:"
   ? `${BACKEND_ORIGIN}/predict`
   : "/predict";
